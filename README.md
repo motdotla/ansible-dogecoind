@@ -33,3 +33,5 @@ sudo easy_install jinja2
 sudo easy_install pyyaml
 sudo easy_install paramiko
 ```
+
+Doge Donate: `DJEBk3QoBGbNL7oWzXqvjgW1A9DuFKHs8q`
