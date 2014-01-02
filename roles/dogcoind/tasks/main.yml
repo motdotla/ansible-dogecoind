@@ -17,23 +17,22 @@
     - libqrencode-dev
     - libboost1.48-all-dev
 
-#- name: Setup swap
-#  command: dd if=/dev/zero of=/swapfile bs=2048 count=1024k
-#
-#- name: Create linux swap area
-#  command: mkswap /swapfile creates=/swapfile
-#
-#- name: Active swap file
-#  command: swapon /swapfile
-#
-#- name: Proper permissions on swap file
-#  command: chown root:root /swapfile
-#
-#- name: Proper permissions on swap file part 2
-#  command: chmod 0600 /swapfile
-#
-#- name: Set swapiness
-#  shell: echo 0 | sudo tee /proc/sys/vm/swappiness
+- name: Create swap space
+  command: dd if=/dev/zero of=/extraswap bs=1M count=512
+  when: ansible_swaptotal_mb < 1
+
+- name: Make swap
+  command: mkswap /extraswap
+  when: ansible_swaptotal_mb < 1
+
+- name: Add to fstab
+  action: lineinfile dest=/etc/fstab regexp="extraswap" line="/extraswap none swap sw 0 0" state=present
+
+- name: Turn swap on
+  command: swapon -a
+
+- name: Set swapiness
+  shell: echo 0 | sudo tee /proc/sys/vm/swappiness
 
 - name: Checkout dogecoin
   git: repo=https://github.com/dogecoin/dogecoin
@@ -52,8 +51,11 @@
 - name: setup ~/.dogecoin/dogecoin.conf
   copy: src=./dogecoin.conf dest=~/.dogecoin/dogecoin.conf mode=0600
 
-#- name: Run dogecoind
-#  shell: nohup dogecoind
+- name: Run dogecoind
+  shell: dogecoind
 
 - name: Pause for 5 seconds
   pause: seconds=5
+
+- name: Simulate pressing enter
+  shell: echo

@@ -4,12 +4,14 @@ Quickly get dogecoind running on your server using this ansible config.
 
 ## Usage
 
+Create a new [droplet](https://www.digitalocean.com/?refcode=ebcbc179c33f) on digital ocean. 
+
 ```
 cp dogecoin.conf.example dogecoin.conf 
 cp hosts.example hosts
 ```
 
-Edit the settings in `dogecoin.conf` and add the server addresses you are deploying to in `hosts`.
+Edit `dogecoin.conf` and `hosts` with configuration of your choice.
 
 Deploy.
 
