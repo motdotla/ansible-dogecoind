@@ -17,23 +17,23 @@
     - libqrencode-dev
     - libboost1.48-all-dev
 
-- name: Setup swap
-  command: dd if=/dev/zero of=/swapfile bs=1024 count=512k creates=/swapfile
-
-- name: Create linux swap area
-  command: mkswap /swapfile creates=/swapfile
-
-- name: Active swap file
-  command: swapon /swapfile creates=/swapfile
-
-- name: Proper permissions on swap file
-  command: chown root:root /swapfile
-
-- name: Proper permissions on swap file part 2
-  command: chmod 0600 /swapfile
-
-- name: Set swapiness
-  shell: echo 0 | sudo tee /proc/sys/vm/swappiness
+#- name: Setup swap
+#  command: dd if=/dev/zero of=/swapfile bs=2048 count=1024k
+#
+#- name: Create linux swap area
+#  command: mkswap /swapfile creates=/swapfile
+#
+#- name: Active swap file
+#  command: swapon /swapfile
+#
+#- name: Proper permissions on swap file
+#  command: chown root:root /swapfile
+#
+#- name: Proper permissions on swap file part 2
+#  command: chmod 0600 /swapfile
+#
+#- name: Set swapiness
+#  shell: echo 0 | sudo tee /proc/sys/vm/swappiness
 
 - name: Checkout dogecoin
   git: repo=https://github.com/dogecoin/dogecoin
@@ -41,10 +41,10 @@
        version=v1.3
 
 - name: Build dogecoind
-  command: chdir=/tmp/dogecoin/src make -j2 -f makefile.unix USE_UPNP=- creates=/tmp/dogecoin/src/dogecoind
+  command: chdir=/tmp/dogecoin/src make -j2 -f makefile.unix USE_UPNP=- creates=/usr/local/bin/dogecoind
 
 - name: Move dogcoind to /usr/local/bin
-  command: cp /tmp/dogecoin/src/dogecoind /usr/local/bin/dogecoind
+  command: cp /tmp/dogecoin/src/dogecoind /usr/local/bin/dogecoind creates=/usr/local/bin/dogecoind
 
 - name: Setup ~/.dogecoin
   shell: mkdir ~/.dogecoin creates=~/.dogecoin/dogecoin.conf
@@ -52,8 +52,8 @@
 - name: setup ~/.dogecoin/dogecoin.conf
   copy: src=./dogecoin.conf dest=~/.dogecoin/dogecoin.conf mode=0600
 
-- name: Run dogecoind
-  shell: nohup dogecoind
+#- name: Run dogecoind
+#  shell: nohup dogecoind
 
 - name: Pause for 5 seconds
   pause: seconds=5
