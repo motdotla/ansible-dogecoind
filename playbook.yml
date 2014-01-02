@@ -1,0 +1,9 @@
+---
+
+- name: Ansible Playbook for installing dogecoind on Digital Ocean
+
+  hosts: webservers
+  roles:
+    - dogcoind
+  remote_user: root
+  sudo: yes

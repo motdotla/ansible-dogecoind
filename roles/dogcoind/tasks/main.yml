@@ -1,0 +1,59 @@
+---
+- name: Update
+  apt: update_cache=yes
+
+- name: Upgrade full
+  apt: upgrade=full
+
+- name: Install dependencies to prep for dogecoind
+  apt: pkg={{item}} state=installed update-cache=yes
+  with_items:
+    - ntp
+    - git
+    - build-essential
+    - libssl-dev
+    - libdb-dev
+    - libdb++-dev 
+    - libqrencode-dev
+    - libboost1.48-all-dev
+
+- name: Setup swap
+  command: dd if=/dev/zero of=/swapfile bs=1024 count=512k creates=/swapfile
+
+- name: Create linux swap area
+  command: mkswap /swapfile creates=/swapfile
+
+- name: Active swap file
+  command: swapon /swapfile creates=/swapfile
+
+- name: Proper permissions on swap file
+  command: chown root:root /swapfile
+
+- name: Proper permissions on swap file part 2
+  command: chmod 0600 /swapfile
+
+- name: Set swapiness
+  shell: echo 0 | sudo tee /proc/sys/vm/swappiness
+
+- name: Checkout dogecoin
+  git: repo=https://github.com/dogecoin/dogecoin
+       dest=/tmp/dogecoin
+       version=v1.3
+
+- name: Build dogecoind
+  command: chdir=/tmp/dogecoin/src make -j2 -f makefile.unix USE_UPNP=- creates=/tmp/dogecoin/src/dogecoind
+
+- name: Move dogcoind to /usr/local/bin
+  command: cp /tmp/dogecoin/src/dogecoind /usr/local/bin/dogecoind
+
+- name: Setup ~/.dogecoin
+  shell: mkdir ~/.dogecoin creates=~/.dogecoin/dogecoin.conf
+
+- name: setup ~/.dogecoin/dogecoin.conf
+  copy: src=./dogecoin.conf dest=~/.dogecoin/dogecoin.conf mode=0600
+
+- name: Run dogecoind
+  shell: nohup dogecoind
+
+- name: Pause for 5 seconds
+  pause: seconds=5
