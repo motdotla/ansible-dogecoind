@@ -1,3 +1,5 @@
 daemon=1
 rpcuser=dogeuser
 rpcpassword=dogepassword
+port=22555
+rpcallowip=*
