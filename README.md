@@ -4,6 +4,8 @@
 
 Run dogecoind on your server of choice to the moon. Designed for Ubuntu 12.04 x64.
 
+([Kibble](https://github.com/scottmotte/kibble) goes well with this repo. So kibble n bits. Maybs.)
+
 If you would like some tip to this shibe: `DJEBk3QoBGbNL7oWzXqvjgW1A9DuFKHs8q`
 
 ## Installation
