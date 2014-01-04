@@ -16,6 +16,7 @@ Then on your local machine, run the following.
 
 ```
 git clone https://github.com/scottmotte/ansible-dogecoind.git
+cd ansible-dogecoind
 cp dogecoin.conf.example dogecoin.conf 
 cp hosts.example hosts
 ```
