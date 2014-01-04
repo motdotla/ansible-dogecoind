@@ -1,6 +1,6 @@
 # ansible-dogecoind
 
-Run dogecoind on your server of choice to the moon. Recommend Ubuntu 12.04.
+Run dogecoind on your server of choice to the moon. Designed for Ubuntu 12.04 x64.
 
 ![](https://raw.github.com/scottmotte/ansible-dogecoind/master/ansible-dogecoind.png)
 
