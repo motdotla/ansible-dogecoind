@@ -48,3 +48,8 @@ sudo easy_install pyyaml
 sudo easy_install paramiko
 ```
 
+## History
+
+This project was originally built at [Riverside.io](http://riverside.io)'s [New Years Hackathon 2014](https://www.hackerleague.org/hackathons/riverside-dot-io-new-years-hackathon-2014). If wantz donate Riverside.io: `DRyL99xweAbB1QJggYif6wPTHnn6F35JJK`.
+
+<img src="http://www.rawr.la/images/newyears_poster.jpg" width="500">
