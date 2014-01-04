@@ -1,29 +1,40 @@
 # ansible-dogecoind
 
-Quickly get dogecoind running on your server using this ansible config.
+Run dogecoind on your server of choice to the moon. Recommend Ubuntu 12.04.
 
-## Usage
+![](https://raw.github.com/scottmotte/ansible-dogecoind/master/ansible-dogecoind.png)
 
-Create a new [droplet](https://www.digitalocean.com/?refcode=ebcbc179c33f) on digital ocean. 
+If you would like some tip to this shibe: `DJEBk3QoBGbNL7oWzXqvjgW1A9DuFKHs8q`
+
+## Installation
+
+### Digital Ocean
+
+Create a [droplet](https://www.digitalocean.com/?refcode=ebcbc179c33f) on digital ocean and note the IP Address. 
+
+Then on your local machine, run the following.
 
 ```
+git clone https://github.com/scottmotte/ansible-dogecoind.git
 cp dogecoin.conf.example dogecoin.conf 
 cp hosts.example hosts
 ```
 
-Edit `dogecoin.conf` and `hosts` with configuration of your choice.
+Edit the `dogecoin.conf` and `hosts` files.
 
-Deploy.
+Deploy using [ansible](http://www.ansibleworks.com). (install instructions for ansible are in [requirements](#requirements) below.
 
 ```
 ansible-playbook playbook.yml -i hosts
 ```
 
+That's it. Now dogecoind is running on its own server.
+
 ## Requirements
 
-[Ansible](http://www.ansibleworks.com/) is required.
+[Ansible](http://www.ansibleworks.com/) is required. 
 
-Install:
+### Installing Ansible on Mac
 
 ```
 cd /tmp
@@ -36,4 +47,3 @@ sudo easy_install pyyaml
 sudo easy_install paramiko
 ```
 
-Doge Donate: `DJEBk3QoBGbNL7oWzXqvjgW1A9DuFKHs8q`
