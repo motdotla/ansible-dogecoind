@@ -1,8 +1,8 @@
 # ansible-dogecoind
 
-Run dogecoind on your server of choice to the moon. Designed for Ubuntu 12.04 x64.
-
 ![](https://raw.github.com/scottmotte/ansible-dogecoind/master/ansible-dogecoind.png)
+
+Run dogecoind on your server of choice to the moon. Designed for Ubuntu 12.04 x64.
 
 If you would like some tip to this shibe: `DJEBk3QoBGbNL7oWzXqvjgW1A9DuFKHs8q`
 
