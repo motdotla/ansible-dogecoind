@@ -37,7 +37,7 @@
 - name: Checkout dogecoin
   git: repo=https://github.com/dogecoin/dogecoin
        dest=/tmp/dogecoin
-       version=v1.3
+       version=v1.5
 
 - name: Build dogecoind
   command: chdir=/tmp/dogecoin/src make -j2 -f makefile.unix USE_UPNP=- creates=/usr/local/bin/dogecoind
